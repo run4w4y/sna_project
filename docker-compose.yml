@@ -1,0 +1,46 @@
+version: "3.3"
+
+services:
+  # backend services
+  postgres:
+    image: postgres:13
+    volumes: 
+      - ./storage/postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=sna_project
+      - POSTGRES_PORT=5432
+    ports: 
+      - "5432:5432"
+  
+  api:
+    build: ./api
+    command: "./start.sh"
+    volumes:
+      - ./api:/proj
+    ports:
+      - "8080-8084:8080"
+    scale: 5
+    dns:
+      - "8.8.8.8" 
+      - "8.8.4.4"
+    environment:
+      - APP_ENV=DEV
+      - HOME=/proj
+    depends_on:
+      - postgres
+
+  # frontend service
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/proj/src
+      - ./frontend/public:/proj/public
+    dns:
+      - "8.8.8.8" 
+      - "8.8.4.4"
+      - "127.0.0.11"
