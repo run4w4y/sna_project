@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "sna_project"
+version = "0.1.0"
+description = ""
+authors = ["Daler Zakirov <dollar.daler@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pydantic = "^1.9.0"
+result = "^0.7.0"
+fastapi = "^0.88.0"
+mypy = "^0.942"
+SQLAlchemy = {extras = ["asyncio", "mypy"], version = "^1.4.35"}
+dependency-injector = "^4.39.1"
+asyncpg = "^0.25.0"
+loguru = "^0.6.0"
+alembic = "^1.7.7"
+hypercorn = "^0.13.2"
+watchfiles = "^0.18.1"
+async-timeout = "^4.0.2"
+PyYAML = "^6.0"
+psycopg2 = "^2.9.5"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
